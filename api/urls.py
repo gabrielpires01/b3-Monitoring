@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import PipelineView
+from . import views
 
 urlpatterns = [
-    path('', PipelineView.as_view()),
+    path('', views.pipelines_list),
+    path('alpha/', views.alpha_view)
 ]
