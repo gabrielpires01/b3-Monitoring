@@ -10,20 +10,25 @@ def get_alpha_api(interval, symbol):
         data = res.json()
     except requests.exceptions.HTTPError as err:
         raise SystemExit(err)
+    print(data)
+    if "Error Message" in data:
+        url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey=MZ84TZBQ0JOZNART'
+        res = requests.get(url)
+
+        try:
+            res.raise_for_status()
+            data = res.json()
+        except requests.exceptions.HTTPError as err:
+            raise SystemExit(err)
+
+        return data['Time Series (Daily)']
 
     return data[f'Time Series ({interval})']
 
 def get_alpha_api_last(interval, symbol):
-    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval={interval}&apikey=MZ84TZBQ0JOZNART'
+    data = get_alpha_api(interval, symbol)
 
-    res = requests.get(url)
-    try:
-        res.raise_for_status()
-        data = res.json()
-    except requests.exceptions.HTTPError as err:
-        raise SystemExit(err)
-
-    return data[f'Time Series ({interval})'][sorted(data[f'Time Series ({interval})'])[-1]]
+    return data[sorted(data)[-1]]
  
 def check_last_alpha_api(interval, symbol, top, bottom, to_email):
     last_data = get_alpha_api_last(interval, symbol)

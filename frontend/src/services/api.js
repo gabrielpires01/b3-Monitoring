@@ -1,8 +1,13 @@
 import axios from "axios"
 
-const baseURL = "http://localhost:5000"
+const baseURL = "http://127.0.0.1:8000/"
 
-export async function recipes() {
-	const response = await axios.get(`${baseURL}/recipes`)
+export async function getPipelines() {
+	const response = await axios.get(`${baseURL}`)
 	return response.data
+}
+
+export async function createPipeline(body) {
+	await axios.post(`${baseURL}`, body)
+	return
 }
