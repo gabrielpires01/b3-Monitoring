@@ -6,7 +6,6 @@ from .models import Pipeline
 from rest_framework.response import Response
 from rest_framework import status
 from .alpha_api import get_alpha_api, get_alpha_api_last
-from .schedular import schedule
 
 import requests
 
@@ -23,12 +22,10 @@ def pipelines_list(request):
     elif request.method == 'POST':
         data = request.data
         serializer = PipelineSerializer(data=data)
-        schedular = schedule()
 
         if serializer.is_valid():
             alpha_data = get_alpha_api_last(data['interval'], data['symbol'])
 
-            schedule.add_job()
             serializer.save()
             return Response(status=status.HTTP_201_CREATED)
 
