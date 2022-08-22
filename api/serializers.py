@@ -4,4 +4,4 @@ from .models import Pipeline
 class PipelineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pipeline
-        fields = ("id", "top_value", "bottom_value", "symbol", "interval" ,"created_at", "email")
+        fields = ("id", "top_value", "bottom_value", "symbol", "interval" ,"created_at", "email" , "current_value")

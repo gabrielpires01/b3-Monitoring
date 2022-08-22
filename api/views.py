@@ -21,10 +21,12 @@ def pipelines_list(request):
     
     elif request.method == 'POST':
         data = request.data
+        alpha_data = get_alpha_api_last(data['interval'], data['symbol'])
+        data['current_value'] = alpha_data['4. close']
+
         serializer = PipelineSerializer(data=data)
 
         if serializer.is_valid():
-            alpha_data = get_alpha_api_last(data['interval'], data['symbol'])
 
             serializer.save()
             return Response(status=status.HTTP_201_CREATED)

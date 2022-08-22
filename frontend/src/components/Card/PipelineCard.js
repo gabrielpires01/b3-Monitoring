@@ -19,6 +19,9 @@ function PipelineCard ({pipeline}) {
 							Sell at: {pipeline.top_value}
 					</Typography>
 					<Typography variant="body1" color="text.primary">
+							Current Value: {pipeline.current_value}
+					</Typography>
+					<Typography variant="body1" color="text.primary">
 							Buy at: {pipeline.bottom_value}
 					</Typography>
 					<Typography variant="body1" color="text.primary">
