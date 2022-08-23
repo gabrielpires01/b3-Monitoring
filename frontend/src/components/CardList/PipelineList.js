@@ -15,9 +15,11 @@ function PipelineList ({update}) {
 	return (
 		<Component>
 			<Title>Your Pipelines</Title>
-			{
-				pipelines.map((pipeline, index) => <PipelineCard pipeline={pipeline} key={`pipeline-${index}`}/>)
-			}
+			<List>
+				{
+					pipelines.map((pipeline, index) => <PipelineCard pipeline={pipeline} key={`pipeline-${index}`}/>)
+				}
+			</List>
 		</Component>
 		
 	)
@@ -28,6 +30,14 @@ const Component = styled.div`
 	flex-direction: column;
 	align-items: center;
 `
+const List = styled.div`
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+`
+
 const Title = styled.h1`
 	font-size: 30px;
 	font-family: "Kaniti";

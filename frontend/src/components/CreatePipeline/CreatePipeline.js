@@ -36,7 +36,7 @@ function CreatePipeline ({setUpdate}) {
 
 	return (
 		<Component>
-			<Button onClick={() => setOpen(!open)}> Create New Pipeline &nbsp;<AiOutlinePlusCircle size={30}/> </Button>
+			<Button sx={{color: "#3A3042"}} onClick={() => setOpen(!open)}> Create New Pipeline &nbsp;<AiOutlinePlusCircle size={30}/> </Button>
 			{open && <Box
 				component="form"
 				sx={{

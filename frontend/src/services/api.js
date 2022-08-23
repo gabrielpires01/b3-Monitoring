@@ -11,3 +11,8 @@ export async function createPipeline(body) {
 	await axios.post(`${baseURL}`, body)
 	return
 }
+
+export async function getQuotations(symbol, interval) {
+	const response = await axios.get(`${baseURL}alpha?symbol=${symbol}&interval=${interval}`)
+	return response.data
+}
