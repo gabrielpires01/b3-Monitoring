@@ -4,7 +4,7 @@ Create Pipelines ot receive email When active reach the top or bottom values
 ## How to inicialize
 
 ### BackEnd 
-first create and enviroment
+first create an enviroment, <br/>
 then:
 ```
   $ pip install -r requirements.txt
