@@ -1,17 +1,17 @@
-from django.shortcuts import render
-from rest_framework import viewsets
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 from rest_framework.decorators import api_view
+
+from api import tasks
 from .serializers import PipelineSerializer
 from .models import Pipeline
 from rest_framework.response import Response
 from rest_framework import status
 from .alpha_api import get_alpha_api, get_alpha_api_last
 
-import requests
-
-
 @api_view(['GET', 'POST'])
 def pipelines_list(request):
+    scheduler = BackgroundScheduler()
     if request.method == 'GET':
         data = Pipeline.objects.all()
 
@@ -27,7 +27,8 @@ def pipelines_list(request):
         serializer = PipelineSerializer(data=data)
 
         if serializer.is_valid():
-
+            tasks.create_job(scheduler, data)
+            scheduler.start()
             serializer.save()
             return Response(status=status.HTTP_201_CREATED)
 
